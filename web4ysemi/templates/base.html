@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <title>web4ysemi</title>
+</head>
+<body>
+    <header>
+        <div class="title">
+            <h1><a href="/">web4ysemi</a></h1>
+        </div>
+        <div class="subtitle">
+            <h3>financials</h3>
+        </div>
+    </header>
+
+    <hr class="title-bottom">
+
+    <div class="content">
+        <h4 class="direction">the data you need (Select at least one)</h4>
+        {% block main %}
+        {% endblock %}
+        <form action="./initDict" method="post" class="init">
+            <input type="submit" value="INIT" id="init">
+        </form>
+
+        <hr class="in-contents">
+    </div>
+
+    <footer class="footer">
+        <ul>
+            <li><a href="https://youtu.be/kn6-c223DUU" target="_blank" rel="noopener noreferrer" class="footer-contents">USAGE</a></li>
+            <li><a href="https://github.com/shion24hub/web4ysemi" target="_blank" rel="noopener noreferrer" class="footer-contents">GitHub</a></li>
+        </ul>
+        <p class="signature">created by Shion Noguchi</p>
+    </footer>
+
+    <script src="{{url_for('static', filename='javascript/base.js')}}"></script>
+</body>
+</html>

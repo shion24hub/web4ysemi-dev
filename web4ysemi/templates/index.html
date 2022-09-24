@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block main %}
+
+<div class="config">
+    <hr class="in-contents">
+    <form action="/reportType" method="post">
+        <div class="options">
+            <div class="form-check">
+                <input type="checkbox" name="reportType" value="financials" id="reportType-financials">
+                <label>
+                    Financials
+                </label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" name="reportType" value="BS" id="reportType-bs">
+                <label>
+                    BS
+                </label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" name="reportType" value="PL" id="reportType-pl">
+                <label>
+                    PL
+                </label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" name="reportType" value="CF" id="reportType-cf">
+                <label>
+                    CF
+                </label>
+            </div>
+        </div>
+        <div class="submit">
+            <input type="submit" value="OK" class="submit-botton" id="reportType">
+        </div>
+    </form>
+
+    <hr class="in-contents">
+
+    <form action="/period" method="post">
+        <div class="options">
+            <div class="form-check">
+                <input type="checkbox" name="period" value="last3years" id="last3years" disabled>
+                <label>
+                    Last 3 years
+                </label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" name="period" value="lastQuarter" id="lastQuarter" disabled>
+                <label>
+                    Last Quarter
+                </label>
+            </div>
+        </div>
+        <div class="submit">
+            <input type="submit" value="OK" class="submit-botton" id="period" disabled>
+        </div>
+    </form>
+
+    <hr class="in-contents">
+
+    <form action="/select" method="post">
+        <div class="search-box">
+            <input type="text" name="companyName" placeholder="Search for company name" class="box" disabled>
+        </div>
+        <div class="submit">
+            <input type="submit" value="SEARCH" class="submit-botton" disabled>
+        </div>
+    </form>
+
+    <hr class="in-contents">
+
+    <form action="/complete" method="post">
+        <div class="submit">
+            <input type="submit" value="DONE" class="submit-botton" id="done" disabled>
+        </div>
+    </form>
+
+    <hr class="in-contents">
+
+</div>
+
+{% endblock %}
