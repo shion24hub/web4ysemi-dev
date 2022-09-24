@@ -11,6 +11,7 @@ from flask import (
 )
 import os
 import pandas
+import random
 import sys
 import shutil
 
@@ -41,7 +42,10 @@ def index():
 
     ### PROCESS ###
 
+    fileId = str(random.randrange(10**9, 10**10))
+
     session.permanent = True
+    session["fileId"] = fileId
     session["optionsDict"] = {} #ティッカー検索で複数個の候補が見つかった場合、その辞書を格納する
     session["completingDict"] = {} #ユーザーが最終的に選んだティッカーが格納されていく
     
@@ -61,10 +65,12 @@ def initDict():
 
     ### PROCESS ###
 
+    session["fileId"] = 0
     session["optionsDict"] = {}
     session["completingDict"] = {}
     session["reportType"] = []
     session["period"] = []
+
     return redirect(url_for("index"))
 
 
@@ -256,25 +262,40 @@ def complete():
 
     ### PROCESS ###
 
+    # このセッションのためのExcelディレクトリを作成
+    sessionEDir = "./financialsExcel/" + session["fileId"]
+    os.mkdir(sessionEDir)
+
+    #個々のエクセルファイルを生成
     mappingdfs = getFinancialsDataFrame(
         session["completingDict"],
         session["reportType"],
         session["period"]
     )
 
-    with pandas.ExcelWriter("./financialsExcel/test.xlsx") as writer :
-        for sheetName, df in mappingdfs.items() :
-            # excelSavePath = "./financialsExcel/" + fileName + ".xlsx"
-            df.to_excel(writer, sheet_name=sheetName)
+    for fileName, df in mappingdfs.items() :
+        excelSavePath = sessionEDir + "/" + fileName + ".xlsx"
+        df.to_excel(excelSavePath)
 
+    # #このセッションのためのZipファイルディレクトリを作成
+    # sessionZDir = "./zipfiles/" + session["fileId"]
+    # os.mkdir(sessionZDir) 
+    
     #zipファイルの作成
-    shutil.make_archive("./zipfiles/myFirstZip", format="zip", root_dir="./financialsExcel")
+    sessionZDir = "./zipfiles/" + session["fileId"]
+    rootDir = sessionEDir
+    shutil.make_archive(sessionZDir, format="zip", root_dir=rootDir)
 
     #zipファイルのdownload
     response = make_response()
-    response.data = open("./zipfiles/myFirstZip.zip", "rb").read()
+    sessionZPath = "./zipfiles/" + session["fileId"] + ".zip"
+    response.data = open(sessionZPath, "rb").read()
     response.headers['Content-Type'] = 'application/octet-stream'
     response.headers['Content-Disposition'] = 'attachment; filename=test.zip'
+
+    #sessionディレクトリとsessionファイルを削除
+    shutil.rmtree(sessionEDir)
+    os.remove(sessionZPath)
     
     return response
 
