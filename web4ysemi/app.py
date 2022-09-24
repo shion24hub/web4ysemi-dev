@@ -26,7 +26,7 @@ sys.path.append(current_dir + "../web4ysemi/lib/manipulatingDatabase/")
 
 
 app = Flask(__name__)
-app.secret_key = "secretkey"
+app.config.from_pyfile("config.cfg")
 app.permanent_session_lifetime = timedelta(minutes=10)
 
 
@@ -263,7 +263,7 @@ def complete():
     ### PROCESS ###
 
     # このセッションのためのExcelディレクトリを作成
-    sessionEDir = "./financialsExcel/" + session["fileId"]
+    sessionEDir = "./gendir/financialsExcel/" + session["fileId"]
     os.mkdir(sessionEDir)
 
     #個々のエクセルファイルを生成
@@ -282,13 +282,13 @@ def complete():
     # os.mkdir(sessionZDir) 
     
     #zipファイルの作成
-    sessionZDir = "./zipfiles/" + session["fileId"]
+    sessionZDir = "./gendir/zipfiles/" + session["fileId"]
     rootDir = sessionEDir
     shutil.make_archive(sessionZDir, format="zip", root_dir=rootDir)
 
     #zipファイルのdownload
     response = make_response()
-    sessionZPath = "./zipfiles/" + session["fileId"] + ".zip"
+    sessionZPath = "./gendir/zipfiles/" + session["fileId"] + ".zip"
     response.data = open(sessionZPath, "rb").read()
     response.headers['Content-Type'] = 'application/octet-stream'
     response.headers['Content-Disposition'] = 'attachment; filename=test.zip'
