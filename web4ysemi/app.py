@@ -288,10 +288,12 @@ def complete():
 
     #zipファイルのdownload
     response = make_response()
-    sessionZPath = "./gendir/zipfiles/" + session["fileId"] + ".zip"
+    zipfileName = session["fileId"] + ".zip"
+    sessionZPath = "./gendir/zipfiles/" + zipfileName
     response.data = open(sessionZPath, "rb").read()
     response.headers['Content-Type'] = 'application/octet-stream'
-    response.headers['Content-Disposition'] = 'attachment; filename=test.zip'
+    contentDisposition = 'attachment; filename=' + zipfileName
+    response.headers['Content-Disposition'] = contentDisposition
 
     #sessionディレクトリとsessionファイルを削除
     shutil.rmtree(sessionEDir)
@@ -301,4 +303,4 @@ def complete():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=False)
