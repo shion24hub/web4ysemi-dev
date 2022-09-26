@@ -65,6 +65,35 @@ def getFinancialsDataFrame(nameTickerDict : dict, reportTypes : list, periods : 
     
     return resultDictionary
 
+def getFinancialDataframe2(ticker, reportType, period) :
+
+    tickerObj = new(ticker)
+
+    if reportType == "financials" and period == "last3years" :
+        return tickerObj.financials
+        
+    elif reportType == "financials" and period == "lastQuarter" :
+        return tickerObj.quarterly_financials
+    
+    elif reportType == "BS" and period == "last3years" :
+        return tickerObj.balance_sheet
+    
+    elif reportType == "BS" and period == "lastQuarter" :
+        return tickerObj.quarterly_balance_sheet
+
+    elif reportType == "PL" and period == "last3years" :
+        return tickerObj.earnings
+
+    elif reportType == "PL" and period == "lastQuarter" :
+        return tickerObj.quarterly_earnings
+
+    elif reportType == "CF" and period == "last3years" :
+        return tickerObj.cashflow
+
+    elif reportType == "CF" and period == "lastQuarter" :
+        return tickerObj.quarterly_cashflow
+
+
 
 if __name__ == "__main__" :
     new("MSFT", "US")
