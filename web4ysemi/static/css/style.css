@@ -131,6 +131,39 @@ header {
     background-color: yellow;
 }
 
+.download-section-title {
+    text-align: center;
+}
+
+/* .download-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+} */
+
+.selection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    padding: 10px;
+}
+
+.file-name {
+    text-align: center;
+}
+
+.download-botton {
+    text-align: center;
+    margin-left: 5px;
+
+    font-weight: bold;
+}
+
+.download-botton:hover {
+    background-color: aquamarine;
+}
+
 .init {
     display: flex;
     justify-content: center;
