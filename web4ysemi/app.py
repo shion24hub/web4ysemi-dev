@@ -7,16 +7,17 @@ from flask import (
     request,
     session,
     Response,
-    make_response
+    make_response,
 )
+
+import io
 import os
 import pandas
 import random
 import sys
-import shutil
 
 from library.makeTickersDict.getTickers.minkabu import minkabu
-from library.operations.getFinancials import getFinancialsDataFrame
+from library.operations.getFinancials import getFinancialDataframe2
 
 current_dir = os.getcwd()
 
@@ -262,45 +263,36 @@ def complete():
 
     ### PROCESS ###
 
-    # このセッションのためのExcelディレクトリを作成
-    sessionEDir = "./gendir/financialsExcel/" + session["fileId"]
-    os.mkdir(sessionEDir)
-
-    #個々のエクセルファイルを生成
-    mappingdfs = getFinancialsDataFrame(
-        session["completingDict"],
-        session["reportType"],
-        session["period"]
+    
+    nameList = [name for name in session["completingDict"].keys()]
+    return render_template(
+        "download.html",
+        nameList = nameList,
+        Dict = session["completingDict"],
+        reportTypes = session["reportType"],
+        periods = session["period"]
     )
 
-    for fileName, df in mappingdfs.items() :
-        excelSavePath = sessionEDir + "/" + fileName + ".xlsx"
-        df.to_excel(excelSavePath)
 
-    # #このセッションのためのZipファイルディレクトリを作成
-    # sessionZDir = "./zipfiles/" + session["fileId"]
-    # os.mkdir(sessionZDir) 
-    
-    #zipファイルの作成
-    sessionZDir = "./gendir/zipfiles/" + session["fileId"]
-    rootDir = sessionEDir
-    shutil.make_archive(sessionZDir, format="zip", root_dir=rootDir)
+@app.route("/download", methods=["POST"])
+def download() :
+    information = request.form.getlist("information")
+    df = getFinancialDataframe2(information[0], information[1], information[2])
 
-    #zipファイルのdownload
-    response = make_response()
-    zipfileName = session["fileId"] + ".zip"
-    sessionZPath = "./gendir/zipfiles/" + zipfileName
-    response.data = open(sessionZPath, "rb").read()
-    response.headers['Content-Type'] = 'application/octet-stream'
-    contentDisposition = 'attachment; filename=' + zipfileName
-    response.headers['Content-Disposition'] = contentDisposition
+    with io.BytesIO() as output :
+        with pandas.ExcelWriter(output, engine="xlsxwriter") as writer :
+            df.to_excel(writer)
+        data = output.getvalue()
+        
+    XLSX_MIMETYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    filename = information[0] + "-" + information[1] + "-" + information[2] + ".xlsx"
+    response = make_response(data)
+    response.headers['Content-Disposition'] = 'attachment; filename=' + filename
+    response.mimetype = XLSX_MIMETYPE
 
-    #sessionディレクトリとsessionファイルを削除
-    shutil.rmtree(sessionEDir)
-    os.remove(sessionZPath)
-    
     return response
 
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    # app.run(debug=False)
+    app.run()
