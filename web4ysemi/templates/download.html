@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block main %}
+
+<h3 class="download-section-title">
+    DOWNLOAD
+</h3>
+
+<hr class="in-contents">
+
+<div class="download-section">
+    {% for name in nameList %}
+        {% for reportType in reportTypes %}
+            {% for period in periods %}
+                <div class="selection">
+                    <div class="file-name">
+                        {{name}} | {{reportType}} | {{period}}
+                    </div>
+                    <div class="download-botton">
+                        <form action="./download" method="post">
+                            <input type="hidden" name="information" value="{{Dict[name]}}">
+                            <input type="hidden" name="information" value="{{reportType}}">
+                            <input type="hidden" name="information" value="{{period}}">
+                            <input type="submit" value="download">
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endfor %}
+</div>
+
+<hr class="in-contents">
+
+{% endblock %}
