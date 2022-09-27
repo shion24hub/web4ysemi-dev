@@ -51,10 +51,10 @@ def getFinancialsDataFrame(nameTickerDict : dict, reportTypes : list, periods : 
                 elif reportType == "BS" and period == "lastQuarter" :
                     resultDictionary[fileName] = tickerObj.quarterly_balance_sheet
 
-                elif reportType == "PL" and period == "last3years" :
+                elif reportType == "Earnings" and period == "last3years" :
                     resultDictionary[fileName] = tickerObj.earnings
 
-                elif reportType == "PL" and period == "lastQuarter" :
+                elif reportType == "Earnings" and period == "lastQuarter" :
                     resultDictionary[fileName] = tickerObj.quarterly_earnings
 
                 elif reportType == "CF" and period == "last3years" :
