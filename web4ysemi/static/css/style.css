@@ -127,6 +127,8 @@ header {
 
 .submit-understand-button {
     padding: 10px;
+
+    color: black;
 }
 
 .submit-understand:hover {
@@ -155,15 +157,18 @@ header {
     text-align: center;
 }
 
-.download-botton {
+.download-form {
     text-align: center;
     margin-left: 5px;
     font-weight: bold;
-    color: black;
 }
 
-.download-botton:hover {
+.download-form:hover {
     background-color: aquamarine;
+}
+
+.download-button {
+    color: black;
 }
 
 .init {

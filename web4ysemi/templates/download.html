@@ -13,14 +13,14 @@
             {% for period in periods %}
                 <div class="selection">
                     <div class="file-name">
-                        {{name}} | {{reportType}} | {{period}}
+                        {{name}} ( {{reportType}} , {{period}} )
                     </div>
-                    <div class="download-botton">
+                    <div class="download-form">
                         <form action="./download" method="post">
                             <input type="hidden" name="information" value="{{Dict[name]}}">
                             <input type="hidden" name="information" value="{{reportType}}">
                             <input type="hidden" name="information" value="{{period}}">
-                            <input type="submit" value="download">
+                            <input type="submit" value="download" class="download-button">
                         </form>
                     </div>
                 </div>
