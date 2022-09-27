@@ -94,6 +94,11 @@ header {
     padding: 10px;
 }
 
+.search-result-candidate {
+    display: flex;
+    flex-direction: column;
+}
+
 .selected-list {
     display: flex;
     flex-direction: column;

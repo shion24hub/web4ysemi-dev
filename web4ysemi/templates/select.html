@@ -95,21 +95,10 @@
     </form>
 
     <form action="/afterSelect" method="post">
-        <div class="options">
+        <div class="search-result-candidate">
             {% for nameOption in nameOptions %}
                 <div class="form-check">
-                    <!-- <label>
-                        <input type="radio" name="nameSelected" value={{nameOption}}>
-                        <label>
-                            {{nameOption}} : {{nameTickersDict[nameOption]}}
-                        </label>
-                    </label> -->
-                                        
-                    <input type="radio" name="nameSelected" value={{nameOption}}>
-                    <label>
-                        {{nameOption}} : {{nameTickersDict[nameOption]}}
-                    </label>
-
+                    <label><input type="radio" name="nameSelected" value={{nameOption}}>{{nameOption}} : {{nameTickersDict[nameOption]}}</label>
                 </div>        
             {% endfor %}
         </div>
