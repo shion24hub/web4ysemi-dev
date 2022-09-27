@@ -4,6 +4,9 @@
 ver 0.0.0 (2022/9/27)
 
 ## Features under development :
+
+0. Migration to Django 
+
 1. Download All botton -> version 1.0.0
 2. U.S. Stock Ticker Search -> version 1.0.0
 3. Login / Logout -> version 2.0.0
