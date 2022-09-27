@@ -1,3 +1,18 @@
+# what is this ?
+
+## Fetch financial information from yahoo finance.
+This is a web application to easily fetch financial information. <br>
+Internally it uses Yahoo Finance API and you can download the financials, BS, Earnings and CF in Excel sheet. 
+
+## Ultra-simple UI.
+This application is designed to be used by anyone, no matter who you are.<br> 
+There is no need to learn difficult Python syntax anymore.
+
+## All at once.
+Have you ever had to search through every single excel file by company name? <br>
+When you finally found it, did you ever despair that it was a PDF file?<br>
+I'm sick of that experience. Get everything in one lump sum.
+
 # Version Information
 
 ## Released Version : 
