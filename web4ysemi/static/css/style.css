@@ -67,6 +67,8 @@ header {
 
 .submit-botton {
     padding: 10px;
+    
+    color: black;
 }
 
 .submit:hover {
@@ -156,8 +158,8 @@ header {
 .download-botton {
     text-align: center;
     margin-left: 5px;
-
     font-weight: bold;
+    color: black;
 }
 
 .download-botton:hover {
@@ -169,6 +171,10 @@ header {
     justify-content: center;
 
     padding: 10px;
+}
+
+.init-button {
+    color: black;
 }
 
 .init:hover {
