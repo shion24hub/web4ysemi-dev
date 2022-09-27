@@ -1,4 +1,4 @@
-# what is this ?
+# ++ What is this ? ++
 
 ## Fetch financial information from yahoo finance.
 This is a web application to easily fetch financial information. <br>
@@ -13,7 +13,7 @@ Have you ever had to search through every single excel file by company name? <br
 When you finally found it, did you ever despair that it was a PDF file?<br>
 I'm sick of that experience. Get everything in one lump sum.
 
-# Version Information
+# ++ Version Information ++
 
 ## Released Version : 
 ver 0.0.0 (2022/9/27)
